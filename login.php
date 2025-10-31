@@ -1,32 +1,32 @@
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
+
     $usuario = $_POST["usuario"];
     $senha = $_POST["senha"];
 
     //conectar no banco de dados
-    $mysqli  = new mysqli("localhost", "root", "12345678", "dsnoite");
+    $mysqli = new mysqli("localhost", "root", "12345678", "dsnoite");
 
     //executar e query e validar se houve retorno.
     $ResultadoDoBanco = $mysqli->query("SELECT * FROM dsnoite.tb_usuario where email = '$usuario'  ");
-    
 
-    if ($ResultadoDoBanco &&  $ResultadoDoBanco->num_rows > 0 ) {
+
+    if ($ResultadoDoBanco && $ResultadoDoBanco->num_rows > 0) {
 
         $linha = $ResultadoDoBanco->fetch_assoc();
 
         if ($senha == $linha['senha']) {
             header("Location: menu.php");
             exit; // sempre use exit depois pra interromper o script
-        }else{
+        } else {
             echo "senha errada";
-        }            
+        }
 
-    }else{
+    } else {
         echo "Usuário não cadastrado.";
     }
-    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -65,20 +65,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <td colspan="2" align="center">
                                 <button type="submit" class="botao-login">login</button>
                             </td>
-                        </tr>              
+                        </tr>
 
                         <tr>
                             <td align="right"><a href="Recupere Senha.php"><i>Recuperar senha</i></a></td>
-                            <td align="center"><a href="cadastrese.php"><i>Cadastre-se</i></a></td>
+                            <td align="center"><a href="cadastre-se.php"><i>Cadastre-se</i></a></td>
                         </tr>
 
                         <tr>
                             <td colspan="2" align="center">
-                               
+
                                 <br><br><br> <br><br><br>
-                                <p style="font-size: 8px;">Condições de Uso Notificação de Privacidade Divulgação de privacidade de dados de saúde de clientes
-                                  <br>Suas escolhas de privacidade em anúncios publicitários
-                                  <br>© 2021-2025 Development.Academy.com, Inc. ou suas afiliadas.
+                                <p style="font-size: 8px;">Condições de Uso Notificação de Privacidade Divulgação de
+                                    privacidade de dados de saúde de clientes
+                                    <br>Suas escolhas de privacidade em anúncios publicitários
+                                    <br>© 2021-2025 Development.Academy.com, Inc. ou suas afiliadas.
                                 </p>
                             </td>
                         </tr>

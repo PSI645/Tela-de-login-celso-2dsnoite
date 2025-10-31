@@ -6,19 +6,19 @@ IF (   $_SERVER["REQUEST_METHOD"] == "POST"   ){
     $cpf = $_POST ["cpf"];
     $tel = $_POST ["tel"];
     $email = $_POST["email"];
-    $senha1 = $_POST["senha"];
+    $senha = $_POST["senha"];
     $senha2 = $_POST["senhaConfirmacao"];
     
-    if ( $senha1 == $senha2  ) {
+    if ( $senha == $senha2  ) {
         
         //conectar no banco de dados
         $mysqli  = new mysqli("localhost", "root", "12345678", "dsnoite");
 
-         $mysqli->query("insert into dsnoite.tb_usuario (nome,cpf,tel,email,senha)
-                    values('$nome','$cpf','$tel','$email','$senha','sim');");
+        $mysqli->query("insert into dsnoite.tb_usuario (nome,cpf,tel,email,senha,ativo)
+                    values('$nome','$cpf',$tel,'$email','$senha','sim');");
 
     }else{
-        echo "senhas Inconsistentes";   
+        echo "Senhas Não correspondem";   
     }
    
 }
@@ -47,7 +47,7 @@ IF (   $_SERVER["REQUEST_METHOD"] == "POST"   ){
     <input name="senhaConfirmacao" placeholder="Confirme a senha:"></input>
     <br>
 
- <button action="submit">Recuperar Senha</button>
+ <button action="submit">Cadastrar</button>
 </form>
 </body>
 </html>
