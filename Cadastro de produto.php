@@ -1,18 +1,26 @@
 <?php
  
- if ($_SERVER["REQUEST_METHOD"] == "POST") {
+IF ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $codigo = $_POST["codigo"];
     $descricao = $_POST["descricao"];
     $preco = $_POST["preco"];
-    $codbarras = $_POST["cod_barras"];
-    $localimg = $_POST["imagem"];
+    $codbarras = $_POST["codbarras"];
+    $localimg = $_POST["localimg"];
         
     $mysqli  = new mysqli("localhost", "root", "12345678", "dsnoite");
-    $mysqli->query("insert into dsnoite.tb_usuario (Codigo,Descricao,Preco,cod_barras,local_img)
-    values
-    ('$codigo','$descricao','$preco','$codbarras','$localimg');");
- }
+    
+    if (isset ($_POST["Confirmar"])){
+
+    $mysqli->query("insert into dsnoite.tb_produto (codigo,descricao,preco,codbarras,localimg)
+    values('$codigo','$descricao',$preco,$codbarras,'$localimg')");
+    }
+
+    if (isset ($_POST["Excluir"])){
+        $mysqli->query("delete from dsnoite.tb_produto where codigo = '$codigo'");
+    }
+
+}
 
 ?>
 <!DOCTYPE html>
@@ -24,6 +32,7 @@
 </head>
 <body>
 
+<form method="POST">
     <table align="center" border="5">
         <tr>
         </tr>
@@ -34,38 +43,37 @@
         <tr>
         </tr>
             <td><label><b>Codigo do Produto:</b></label></td>
-            <td><input type="text" name="codigo" required></td>
+            <td>
+            <input name="codigo"></input> 
+            </td>
         </tr>
         <tr>
             <td><label><b>Descrição do Produto:</b></label></td>
-            <td><input type="text" name="descricao" required></td>
+            <td><input type="text" name="descricao"></td>
         <tr>
         </tr>
             <td><label><b>Preço do Produto:</b></label></td>
-            <td><input type="number" name="preco" required></td>
+            <td><input type="number" name="preco"></td>
         </tr>
          </tr>
             <td><label><b>Codigo de Barras:</b></label></td>
-            <td><input type="text" name="cod_barras" required></td>
+            <td><input type="text" name="codbarras"></td>
         </tr>
 
-        <tr>
-            
-        </tr>
-
-        <tr>
             <form method="POST">
                 <td colspan="2" align="center">
-                    <label for="imagem">Envie sua imagem:</label>
-                    <input type="file" name="imagem" accept="image/*">
-                    <button type="submit" class="botao-cadastro">Confirmar</button>
+                    <label for="imagem">Imagem:</label>
+                    <input type="file" name="localimg">
+                    <br>
+                    <button name="Confirmar" type="submit">Confirmar</button>
+                    <button name="Excluir" type="submit">Excluir</button>
                 </td>
         </tr>
 
         <tr>
     </table>
 
-    
+</form>   
 </body>
 </html>
 

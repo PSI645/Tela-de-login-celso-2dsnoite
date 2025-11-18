@@ -23,6 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
+    <form method="POST">
     <table align="center" border="5">
         <tr>
         </tr>
@@ -49,6 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </tr>
 
         <tr>
+    </form>
             <form method="POST">
                 <td colspan="2" align="center">
                     <button type="submit" class="botao-mudarsenha">Confirmar</button>
