@@ -2,7 +2,7 @@
 
 $descricaoProduto = "";
 $precoProduto = "";
-$imgProduto = "";
+$localimg = "";
 $codBarrasProduto = "";
 $codigo = "";
 
@@ -12,17 +12,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $descricao = $_POST["descricao"];
     $codbarras = $_POST["codbarras"];
     $preco = $_POST["preco"];
-    $img_local = $_POST["img_local"];
+    $localimg = $_POST["localimg"];
 
     //conectar no banco de dados
-    $mysqli  = new mysqli("localhost", "root", "root", "dsnoite");
+    $mysqli  = new mysqli("localhost", "root", "12345678", "dsnoite");
 
     //o botão gravar foi clicado ???
     if ( isset ( $_POST["gravar"] ) ) {
 
         try{
-        $mysqli->query("insert into dsnoite.tb_produto (codigo,descricao,codbarras,preco,img_local) 
-                        values('$codigo','$descricao','$codbarras',$preco,'$img_local')");
+        $mysqli->query("insert into dsnoite.tb_produto (codigo,descricao,codbarras,preco,localimg) 
+                        values('$codigo','$descricao','$codbarras',$preco,'$localimg')");
         }catch (mysqli_sql_exception $e){
             if ( $e->getCode() == 1062 ){
                 $mysqli->query("update dsnoite.tb_produto set descricao = '$descricao', codbarras = $codbarras',  preco = $preco, img_local = '$img_local' where codigo = '$codigo'");
@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $linha = $resultadoQuery->fetch_assoc();       
                 $descricaoProduto = $linha['descricao'];
                 $precoProduto = $linha['preco'];
-                $imgProduto = $linha['img_local'];       
+                $imgProduto = $linha['localimg'];       
                 $codBarrasProduto = $linha['codbarras'];  
                 $codigo = $linha['codigo']; 
             }
@@ -118,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label>Imagem</label>
                 </td>
                 <td>
-                    <input name="img_local" placeholder="c:/img/dsnoite/nike.jpg" value="<?php echo $imgProduto; ?>">  </input>
+                    <input type="file" name="localimg" value="<?php echo $localimg; ?>">  </input>
                 </td>
             </tr>
             <tr>

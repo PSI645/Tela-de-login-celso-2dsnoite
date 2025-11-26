@@ -31,10 +31,31 @@ values
 
 select * from dsnoite.tb_usuario;
 select * from dsnoite.tb_produto;
-select * from dsnoite.tb_produto where codigo = '01';
-delete from dsnoite.tb_produto where codigo = "03";
+select * from dsnoite.tb_black_friday;
+select * from dsnoite.tb_produto where codigo = '6';
+delete from dsnoite.tb_produto where codigo = "6";
+drop table dsnoite.tb_black_friday;
 
 update dsnoite.tb_usuario set senha = '874961' where email = 'admin@sistema.com';
+
+insert into dsnoite.tb_black_friday (codigo,dt_inicio,dt_fim)
+values 
+('codigo',dt_inicio,dt_fim);
+
+
+
+CREATE TABLE dsnoite.tb_black_friday (
+    codigobl VARCHAR(30) PRIMARY KEY,
+    dt_inicio datetime,
+    dt_fim datetime
+);
+
+insert into dsnoite.tb_black_friday (codigobl,dt_inicio,dt_fim)
+    values('codigobl','01-01-2025 00:00:00' ,'02-01-2025 00:00:01')
+
+
+
+
 
 
 
