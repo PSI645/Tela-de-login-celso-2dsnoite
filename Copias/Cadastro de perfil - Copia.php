@@ -118,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label>Imagem</label>
                 </td>
                 <td>
-                    <input type="file" name="localimg" value="<?php echo $localimg; ?>">  </input>
+                    <input name="localimg" value="<?php echo $localimg; ?>">  </input>
                 </td>
             </tr>
             <tr>

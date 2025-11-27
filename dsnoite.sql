@@ -16,15 +16,16 @@ insert into dsnoite.tb_usuario
 values 
 ('Administrador','111.111.111-00',1139776540,'admin@sistema.com','1234567890','sim');
 
-create table dsnoite.tb_Produto (
-	codigo varchar(100),
+create table dsnoite.tb_produto (
+	id int auto_increment primary key,
+	codigo  varchar(100),
     descricao varchar (100),
     preco real,
     codbarras int (20),
-    localimg varchar (200)
+    img_local varchar (200)
 );
 insert into dsnoite.tb_produto
-(codigo,descricao,preco,codbarras,localimg)
+(codigo,descricao,preco,codbarras,img_local)
 values
 ('02','Teste de produto',10.10,123456789,'C:\Users\2bmod\Pictures');
 
@@ -34,7 +35,7 @@ select * from dsnoite.tb_produto;
 select * from dsnoite.tb_black_friday;
 select * from dsnoite.tb_produto where codigo = '6';
 delete from dsnoite.tb_produto where codigo = "6";
-drop table dsnoite.tb_black_friday;
+drop table dsnoite.tb_produto;
 
 update dsnoite.tb_usuario set senha = '874961' where email = 'admin@sistema.com';
 
@@ -51,7 +52,9 @@ CREATE TABLE dsnoite.tb_black_friday (
 );
 
 insert into dsnoite.tb_black_friday (codigobl,dt_inicio,dt_fim)
-    values('codigobl','01-01-2025 00:00:00' ,'02-01-2025 00:00:01')
+    values('codigobl','01-01-2025 00:00:00' ,'02-01-2025 00:00:01');
+    
+    insert into dsnoite.tb_produto(codigo,descricao,preco,codbarras,img_local) values('01','Dinossauro Louco com Copo ',119.26,'12345678910','Toys.jpg')
 
 
 

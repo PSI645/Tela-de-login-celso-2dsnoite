@@ -2,7 +2,7 @@
 
 $descricaoProduto = "";
 $precoProduto = "";
-$localimg = "";
+$imgProduto = "";
 $codBarrasProduto = "";
 $codigo = "";
 
@@ -10,22 +10,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $codigo = $_POST["codigo"];
     $descricao = $_POST["descricao"];
-    $codbarras = $_POST["codbarras"];
     $preco = $_POST["preco"];
-    $localimg = $_POST["localimg"];
+    $codbarras = $_POST["codbarras"];
+    $img_local = $_POST["img_local"];
 
     //conectar no banco de dados
-    $mysqli  = new mysqli("localhost", "root", "12345678", "dsnoite");
+    $mysqli  = new  mysqli("localhost", "root", "12345678", "dsnoite");
 
     //o botão gravar foi clicado ???
     if ( isset ( $_POST["gravar"] ) ) {
 
         try{
-        $mysqli->query("insert into dsnoite.tb_produto (codigo,descricao,codbarras,preco,localimg) 
-                        values('$codigo','$descricao','$codbarras',$preco,'$localimg')");
+
+        $mysqli->query("insert into dsnoite.tb_produto(codigo,descricao,preco,codbarras,img_local)
+            values('$codigo','$descricao',$preco,'$codbarras','$img_local')");
         }catch (mysqli_sql_exception $e){
             if ( $e->getCode() == 1062 ){
-                $mysqli->query("update dsnoite.tb_produto set descricao = '$descricao', codbarras = $codbarras',  preco = $preco, img_local = '$img_local' where codigo = '$codigo'");
+                $mysqli->query("update dsnoite.tb_produto set descricao = '$descricao',preco = $preco, codbarras = $codbarras', img_local = '$img_local' where codigo = '$codigo'");
             };
 
         }
@@ -41,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $linha = $resultadoQuery->fetch_assoc();       
                 $descricaoProduto = $linha['descricao'];
                 $precoProduto = $linha['preco'];
-                $imgProduto = $linha['localimg'];       
+                $imgProduto = $linha['img_local'];       
                 $codBarrasProduto = $linha['codbarras'];  
                 $codigo = $linha['codigo']; 
             }
@@ -118,7 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label>Imagem</label>
                 </td>
                 <td>
-                    <input type="file" name="localimg" value="<?php echo $localimg; ?>">  </input>
+                    <input type="file" name="img_local" value="<?php echo $imgProduto; ?>">  </input>
                 </td>
             </tr>
             <tr>
